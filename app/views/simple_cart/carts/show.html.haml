@@ -1,0 +1,59 @@
+.container
+  .row
+    .col-md-12
+      .thumbnail
+        .caption-full
+          = form_tag url_for(:controller => 'carts', :action => 'update'), method: :put do
+            - if @cart.items.nil?
+              empty
+            - else
+              %table.table.table-hover
+                %thead
+                  %th.col-md-1
+                    Cover
+                  %th.col-md-4
+                    Item
+                  %th.col-md-4
+                    Price
+                  %th.col-md-1
+                    Qty
+                  %th.col-md-2
+                    Total
+                  %th.col-md-1
+                %tbody                
+                  - @cart.items.each_with_index do |item, index|
+                    %tr
+                      %td
+                        / = image_tag(book.cover.url)
+                      %td
+                        = item.class
+                        = item.name
+                      %td
+                        = number_to_currency(item.price)
+                      %td
+                        = number_field_tag "#{item.class.to_s}_#{item.id}", @cart.session["#{item.class.to_s}_#{item.id}"], class: 'form-control', min: '1', max: '99', :id => item.id.to_s
+                      %td
+                        = number_to_currency(item.price * @cart.session["#{item.class.to_s}_#{item.id}"])
+                      %td
+                        = link_to 'X', simple_cart.remove_cart_path(:id => "#{item.class.to_s}_#{item.id}")
+                  %tr
+                    %td{colspan: 3}
+                    %td
+                      %p.text-right
+                        %strong
+                          Subtotal
+                    %td
+                      = number_to_currency(@cart.subtotal)
+                    %td
+              .row
+                .col-xs-12.col-sm-2.col-md-2.col-lg-2
+                  = link_to 'Empty cart', simple_cart.clear_cart_path, class: 'btn btn-primary btn-block', method: :post
+                .col-xs-12.col-sm-3.col-md-3.col-lg-2
+                  = link_to 'Continue shopping', '/', class: 'btn btn-primary btn-block'
+                .col-sm-1.col-sm-1.col-lg-2
+                .col-xs-12.col-sm-2.col-md-2.col-lg-2
+                  = text_field_tag 'coupon', nil, {class: 'form-control', placeholder: "A2016 - 30%"}
+                .col-xs-12.col-sm-2.col-md-2.col-lg-2
+                  = submit_tag 'Update', class: 'btn btn-primary btn-block'
+                .col-xs-12.col-sm-2.col-md-2.col-lg-2
+                  = link_to 'Checkout', checkout_cart_path(:coupon => params[:coupon]), method: :post, class: 'btn btn-primary btn-block'

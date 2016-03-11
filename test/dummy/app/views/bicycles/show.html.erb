@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @bicycle.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @bicycle.price %>
+</p>
+
+<p>
+  <strong>Qty:</strong>
+  <%= @bicycle.qty %>
+</p>
+
+<%= add_to_cart(@bicycle) %>
+
+<%= link_to 'Edit', edit_bicycle_path(@bicycle) %> |
+<%= link_to 'Back', bicycles_path %>
