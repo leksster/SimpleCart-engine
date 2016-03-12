@@ -1,22 +1,24 @@
 module SimpleCart
   class CartsController < SimpleCart::ApplicationController
     before_action :cart_data, except: :clear
-    before_action :authenticate_user!, only: [:checkout]
 
     def show
     end
 
     def checkout
-      respond_to do |format|
-        @order = @cart.build_order_for(current_user)
-        @order.total_price -= @cart.discount(params[:coupon]) unless @cart.discount(params[:coupon]).nil?
-        if @order.save && !@cart.session.empty?
-          format.html { redirect_to order_checkout_index_path(@order), notice: 'In order to proceed, please provide additional details.' }
-          session.delete(:cart)
-        else
-          format.html { redirect_to cart_path, alert: "Something went wrong" }
-        end
-      end
+      @order = @cart.build_order
+      @order.save
+      redirect_to order_checkout_index_path(@order), alert: "ok"
+      # respond_to do |format|
+      #   @order = @cart.build_order_for(current_user)
+      #   @order.total_price -= @cart.discount(params[:coupon]) unless @cart.discount(params[:coupon]).nil?
+      #   if @order.save && !@cart.session.empty?
+      #     format.html { redirect_to order_checkout_index_path(@order), notice: 'In order to proceed, please provide additional details.' }
+      #     session.delete(:cart)
+      #   else
+      #     format.html { redirect_to cart_path, alert: "Something went wrong" }
+      #   end
+      # end
     end
 
     def add
@@ -41,7 +43,7 @@ module SimpleCart
 
     def clear
       session.delete(:cart)
-      redirect_to simple_cart.cart_path
+      redirect_to cart_path
     end
 
     private 

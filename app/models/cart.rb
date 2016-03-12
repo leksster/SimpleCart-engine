@@ -27,19 +27,19 @@ class Cart
     end
   end
 
-  # def order_items
-  #   items = []
-  #   books.each do |book|
-  #     items << OrderItem.new(price: book.price, qty: @session[book.id.to_s], book: book)
-  #   end
-  #   items
-  # end
+  def order_items
+    items = []
+    self.items.each do |item|
+      items << OrderItem.new(price: item.price, qty: @session["#{item.class}_#{item.id}".to_s], itemable: item)
+    end
+    items
+  end
 
-  # def build_order_for(user)
-  #   order = user.orders.new(total_price: self.subtotal, completed_date: Time.now)
-  #   order.order_items << self.order_items
-  #   order
-  # end
+  def build_order
+    order = Order.new(total_price: self.subtotal, completed_date: Time.now)
+    order.order_items << self.order_items
+    order
+  end
 
   def add_item(book_id, qty)
     qty = 1 unless qty > 0
