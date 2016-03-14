@@ -4,8 +4,8 @@
       - if flash[:alert]
         .alert
           = flash[:alert]
-      = @cart.order_items
-      = @cart.build_order
+      / = @cart.order_items
+      / = @cart.build_order
       .thumbnail
         .caption-full
           = form_tag url_for(:controller => 'carts', :action => 'update'), method: :put do

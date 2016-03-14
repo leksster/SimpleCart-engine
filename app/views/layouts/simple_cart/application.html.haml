@@ -3,7 +3,7 @@
   %head
     %title Cart
     = stylesheet_link_tag    "simple_cart/application", media: "all"
-    = javascript_include_tag "simple_cart/application"
+    = javascript_include_tag "simple_cart/application", "jquery" "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
     = yield

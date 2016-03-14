@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :shipping_address
   accepts_nested_attributes_for :billing_address
-  # accepts_nested_attributes_for :credit_card
+  accepts_nested_attributes_for :credit_card
   
 
   validates :total_price, :completed_date, :aasm_state, presence: true

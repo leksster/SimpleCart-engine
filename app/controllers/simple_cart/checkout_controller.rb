@@ -1,5 +1,5 @@
 module SimpleCart
-  class CheckoutController < ApplicationController
+  class CheckoutController < SimpleCart::ApplicationController
 
     include Wicked::Wizard
     # before_action :authenticate_user!
