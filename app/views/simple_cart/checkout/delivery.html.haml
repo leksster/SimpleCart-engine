@@ -33,10 +33,10 @@
                 %li= msg
         
         .form-group
-          - Delivery.all.each do |company|
+          - SimpleCart::Delivery.all.each do |company|
             .radio
               %label 
-                = f.radio_button :delivery_id, company.id, :checked => company == Delivery.first || @order.delivery == company
+                = f.radio_button :delivery_id, company.id, :checked => company == SimpleCart::Delivery.first || @order.delivery == company
                 = "#{company.company}, #{number_to_currency(company.costs)}"
 
         .actions

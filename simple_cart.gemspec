@@ -17,14 +17,14 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.2.5.2"
-  s.add_dependency "haml"
-  s.add_dependency "bootstrap-sass"
-  s.add_dependency "sass-rails"
-  s.add_dependency "wicked"
-  s.add_dependency "aasm"
-  s.add_dependency "jquery-rails"
-  s.add_dependency "turbolinks"
+  s.add_dependency "rails", "~> 4.2", ">= 4.2.5.2"
+  s.add_dependency "haml", "~> 4.0"
+  s.add_dependency "bootstrap-sass", "~> 3.3"
+  s.add_dependency "sass-rails", "~> 5.0"
+  s.add_dependency "wicked", "~> 1.2"
+  s.add_dependency "aasm", "~> 4.9"
+  s.add_dependency "jquery-rails", "~> 4.1"
+  s.add_dependency "turbolinks", "~> 2.5"
 
   s.add_development_dependency "sqlite3"
 end

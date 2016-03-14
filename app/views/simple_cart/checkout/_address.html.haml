@@ -18,4 +18,4 @@
   = ff.text_field :phone, class: 'form-control'
 .form-group
   = ff.label :country
-  = ff.collection_select :country, Address.countries, :to_s, :to_s, {}, {class: 'form-control'}
+  = ff.collection_select :country, SimpleCart::Address.countries, :to_s, :to_s, {}, {class: 'form-control'}

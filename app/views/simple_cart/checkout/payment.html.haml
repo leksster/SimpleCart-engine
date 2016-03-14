@@ -39,10 +39,10 @@
             .row    
               .col-xs-6
                 = ff.label :expiration_month
-                = ff.collection_select :expiration_month, CreditCard.months, :to_s, :to_s, {}, :class => 'form-control'
+                = ff.collection_select :expiration_month, SimpleCart::CreditCard.months, :to_s, :to_s, {}, :class => 'form-control'
               .col-xs-6
                 = ff.label :expiration_year
-                = ff.collection_select :expiration_year, CreditCard.years, :to_s, :to_s, {}, :class => 'form-control'
+                = ff.collection_select :expiration_year, SimpleCart::CreditCard.years, :to_s, :to_s, {}, :class => 'form-control'
           .form-group
             = ff.label :cvv
             .form-inline
