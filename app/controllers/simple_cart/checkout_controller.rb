@@ -2,13 +2,11 @@ module SimpleCart
   class CheckoutController < SimpleCart::ApplicationController
 
     include Wicked::Wizard
-    # before_action :authenticate_user!
     before_action :set_order
 
     steps :billing, :shipping, :delivery, :payment, :confirm
 
     def show
-      # authorize! :edit, @order
       case step
       when :delivery
         jump_to(:billing) if @order.shipping_address.nil?

@@ -1,6 +1,6 @@
 module SimpleCart
   class CartsController < SimpleCart::ApplicationController
-    before_action :cart_data, except: :clear
+    before_action :cart_data
 
     def show
     end
@@ -8,17 +8,8 @@ module SimpleCart
     def checkout
       @order = @cart.build_order
       @order.save
-      redirect_to order_checkout_index_path(@order), alert: "ok"
-      # respond_to do |format|
-      #   @order = @cart.build_order_for(current_user)
-      #   @order.total_price -= @cart.discount(params[:coupon]) unless @cart.discount(params[:coupon]).nil?
-      #   if @order.save && !@cart.session.empty?
-      #     format.html { redirect_to order_checkout_index_path(@order), notice: 'In order to proceed, please provide additional details.' }
-      #     session.delete(:cart)
-      #   else
-      #     format.html { redirect_to cart_path, alert: "Something went wrong" }
-      #   end
-      # end
+      redirect_to order_checkout_index_path(@order)
+      session.delete(:cart)
     end
 
     def add
@@ -49,7 +40,7 @@ module SimpleCart
     private 
 
     def cart_data
-      @cart = Cart.new(session[:cart] ||= {})
+      @cart = SimpleCart::Cart.new(session[:cart] ||= {})
     end
   end
 end

@@ -31,30 +31,11 @@ module SimpleCart
     ['billing_address', 'shipping_address', 'credit_card'].each do |method|
       define_method("build_or_find_#{method}") do
         self.instance_eval(method).nil? ? instance_eval("build_#{method}") : instance_eval(method)
-        # return instance_eval(method) unless self.instance_eval(method).nil?
-        # return instance_eval("build_#{method}(user.instance_eval(method).attributes.except('id', 'user_id'))") unless user.instance_eval(method).nil?
-        # return instance_eval("build_#{method}") if self.instance_eval(method).nil? && user.instance_eval(method).nil?
       end
     end
-
-    # rails_admin do
-    #   edit do
-    #     include_all_fields
-    #   end
-    #   list do
-    #     field :id
-    #     field :aasm_state
-    #     field :total_price
-    #     include_all_fields
-    #   end
-    # end
 
     def subtotal
       order_items.inject(0) { |n, order_item| n += order_item.price * order_item.qty }
     end
-
-    # def aasm_state_enum
-    #   self.class.aasm.states_for_select
-    # end
   end
 end

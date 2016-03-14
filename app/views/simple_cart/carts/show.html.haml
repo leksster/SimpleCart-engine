@@ -9,7 +9,7 @@
       .thumbnail
         .caption-full
           = form_tag url_for(:controller => 'carts', :action => 'update'), method: :put do
-            - if @cart.items.nil?
+            - if @cart.session.empty?
               empty
             - else
               %table.table.table-hover
