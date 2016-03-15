@@ -52,7 +52,7 @@ module SimpleCart
       @session.delete(item_id)
     end
 
-    def update_books(params)
+    def update_items(params)
       @session.each do |k, v|
         params[k] = 1 unless params[k].to_i > 0
         @session[k] = params[k].to_i

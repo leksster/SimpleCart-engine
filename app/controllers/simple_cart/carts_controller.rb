@@ -8,8 +8,8 @@ module SimpleCart
     def checkout
       @order = @cart.build_order
       @order.save
-      redirect_to order_checkout_index_path(@order)
       session.delete(:cart)
+      redirect_to order_checkout_index_path(@order)
     end
 
     def add
@@ -18,7 +18,7 @@ module SimpleCart
     end
 
     def update
-      @cart.update_books(params)
+      @cart.update_items(params)
       render :show
     end
 
