@@ -1,0 +1,11 @@
+language: ruby
+rvm:
+  - 2.2.3
+before_install: 
+  - gem install bundler -v 1.11.2
+  - bundle update
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate
+  - rspec

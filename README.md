@@ -8,21 +8,25 @@ gem 'simple_cart'
 
 ### Usage:
 
-Create or update your model with fields:
+# Your model should contain fields:
   - name (sting)
   - price (decimal)
   - qty (integer)
-
-Add to your route.rb file
-```ruby
-mount SimpleCart::Engine => "/simple_cart"
+```html
+<%= add_to_cart(object) %>
 ```
-Run SimpleCart migrations
+
+# After you install SimpleCart and add it to your Gemfile, you need to run the generator:
 ```ruby
-rake simple_cart:install:migrations
+rails generate simple_cart:install
+```
+
+# Run migrations task
+```ruby
 rake db:migrate
 ```
-You can manage delivery companies in the database using rake tasks. You need to create one in order to use checkout procedure properly.
+
+# You can manage delivery services in the database using rake tasks. You need to create one in order to use checkout procedure properly.
 ```ruby
 rake simple_cart:create_delivery [NAME] [COSTS]
 rake simple_cart:delete_delivery [NAME]
@@ -32,5 +36,10 @@ rake simple_cart:delete_all
 Use view helper method to add 'buy' button with required object:
 ```html
 <%= add_to_cart(object) %>
+```
+
+# If you want to customize views
+```ruby
+rake simple_cart:views
 ```
 :trollface:
