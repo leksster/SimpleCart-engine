@@ -31,7 +31,7 @@ module SimpleCart
       when :shipping
         @order.update(order_params)
       when :delivery
-        @order.delivery = Delivery.find(params[:order][:delivery_id])
+        @order.delivery = SimpleCart::Delivery.find(params[:order][:delivery_id])
       when :payment
         @order.update(order_params)
       end
@@ -41,7 +41,7 @@ module SimpleCart
     private
 
     def set_order
-      @order = Order.find(params[:order_id])
+      @order = SimpleCart::Order.find(params[:order_id])
     end
 
     def order_params

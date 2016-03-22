@@ -1,0 +1,117 @@
+.container
+  .row
+    %br
+    .col-md-3.col-sm-3
+      %h4
+        Billing Address
+      = @order.billing_address.firstname
+      = @order.billing_address.lastname
+      %br
+      = @order.billing_address.address
+      %br
+      = @order.billing_address.zipcode
+      %br
+      = @order.billing_address.city
+      %br
+      = @order.billing_address.phone
+      %br
+      = @order.billing_address.country
+    .col-md-3.col-sm-3
+      %h4
+        Shipping Address 
+      %p
+        = @order.shipping_address.firstname
+        = @order.shipping_address.lastname
+        %br
+        = @order.shipping_address.address
+        %br
+        = @order.shipping_address.zipcode
+        %br
+        = @order.shipping_address.city
+        %br
+        = @order.shipping_address.phone
+        %br
+        = @order.shipping_address.country
+    .col-md-3.col-sm-3
+      %h4
+        Shipments
+      - unless @order.delivery.nil?
+        %p
+          = @order.delivery.company
+          %br
+          = @order.delivery.costs
+    .col-md-3.col-sm-3
+      %h4
+        Payment Information
+      - unless @order.credit_card.nil?
+        %p
+          = @order.credit_card.number
+          %br
+          = @order.credit_card.expiration_month
+          #{"/"}
+          = @order.credit_card.expiration_year
+
+  .row
+    .col-md-12
+      .thumbnail
+        .caption-full
+          %h2
+            = "Order##{@order.id}"
+            %small
+              %i
+                = @order.aasm.human_state
+          - if @order.order_items.empty?
+            %h2
+              No items.
+          - else
+            %table.table.table-hover                  
+              %thead        
+                %th.col-md-1
+                  Cover
+                %th.col-md-4
+                  Book
+                %th.col-md-4
+                  Price
+                %th.col-md-1
+                  Qty
+                %th.col-md-2
+                  Total
+              %tbody
+                - @order.order_items.each do |item|
+                  %tr
+                    %td
+                      / = image_tag(item.itemable.cover.url)
+                    %td
+                      = item.itemable.name
+                    %td
+                      $#{item.itemable.price}
+                    %td
+                      = item.qty
+                    %td
+                      $#{item.price * item.qty}
+                %tr.line
+                  %td{colspan: 3}
+                  %td.text-right
+                    %strong
+                      Subtotal:
+                      %br
+                      Shipping:
+                  %td
+                    = number_to_currency(@order.total_price - @order.delivery.costs)
+                    %br
+                    = number_to_currency(@order.delivery.costs) unless @order.delivery.nil?
+                %tr
+                  %td{colspan: 2}
+                  %td.text-right{colspan: 2}
+                    %strong
+                      Order total:
+                  %td
+                    = number_to_currency(@order.total_price)
+  .row
+    .col-md-4
+      = link_to 'Back to orders', orders_path, :class => "btn btn-default btn-block"
+    .col-md-4
+
+    .col-md-4
+      - if @order.in_progress?
+        = link_to 'Continue checkout', order_checkout_index_path(@order), :class => "btn btn-success btn-block"

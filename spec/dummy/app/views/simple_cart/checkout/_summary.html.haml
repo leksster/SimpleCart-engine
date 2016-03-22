@@ -1,0 +1,14 @@
+%p
+  Item Total:
+  %strong
+    = number_to_currency(SimpleCart::Order.find(params[:order_id]).total_price)
+
+- unless SimpleCart::Order.find(params[:order_id]).delivery.nil?
+  %p
+    Shipping:
+    %strong
+      = number_to_currency(SimpleCart::Order.find(params[:order_id]).delivery.costs)
+  %p
+    Order Total:
+    %strong
+      = number_to_currency(SimpleCart::Order.find(params[:order_id]).total_price + SimpleCart::Order.find(params[:order_id]).delivery.costs)

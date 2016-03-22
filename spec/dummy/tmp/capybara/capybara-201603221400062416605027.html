@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart</title>
+<link rel="stylesheet" media="all" href="/assets/simple_cart/application-ac809b56de5a877afdff31e2f6d6638da7a3ef28f1381bf1d396cb78d8f386ba.css" />
+<script src="/assets/simple_cart/application-8f06a73c35179188914ab50e057157639fce1401c1cdca640ac9cec33746fc5b.js" jquerydata-turbolinks-track="true"></script>
+
+</head>
+<body>
+<div class='container'>
+<div class='row'>
+<div class='col-md-12'>
+<!-- = @cart.order_items -->
+<!-- = @cart.build_order -->
+<div class='thumbnail'>
+<div class='caption-full'>
+<form action="/shop/cart" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="put" />
+<table class='table table-hover'>
+<thead>
+<th class='col-md-1'>
+Cover
+</th>
+<th class='col-md-4'>
+Item
+</th>
+<th class='col-md-4'>
+Price
+</th>
+<th class='col-md-1'>
+Qty
+</th>
+<th class='col-md-2'>
+Total
+</th>
+<th class='col-md-1'></th>
+</thead>
+<tbody>
+<tr>
+<td>
+<!-- = image_tag(book.cover.url) -->
+</td>
+<td>
+Thing
+Thing25
+</td>
+<td>
+$52.20
+</td>
+<td>
+<input type="number" name="Thing_1" id="1" value="2" class="form-control" min="1" max="99" />
+</td>
+<td>
+$104.40
+</td>
+<td>
+<a href="/shop/cart/remove?id=Thing_1">X</a>
+</td>
+</tr>
+<tr>
+<td colspan='3'></td>
+<td>
+<p class='text-right'>
+<strong>
+Subtotal
+</strong>
+</p>
+</td>
+<td>
+$104.40
+</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class='row'>
+<div class='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
+<a class="btn btn-primary btn-block" rel="nofollow" data-method="post" href="/shop/cart/clear">Empty cart</a>
+</div>
+<div class='col-xs-12 col-sm-3 col-md-3 col-lg-2'>
+<a class="btn btn-primary btn-block" href="/">Continue shopping</a>
+</div>
+<div class='col-sm-1 col-sm-1 col-lg-2'></div>
+<div class='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
+<input type="text" name="coupon" id="coupon" class="form-control" placeholder="A2016 - 30%" />
+</div>
+<div class='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
+<input type="submit" name="commit" value="Update" class="btn btn-primary btn-block" />
+</div>
+<div class='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
+<a class="btn btn-primary btn-block" rel="nofollow" data-method="post" href="/shop/cart/checkout">Checkout</a>
+</div>
+</div>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

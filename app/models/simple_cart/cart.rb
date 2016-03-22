@@ -11,8 +11,8 @@ module SimpleCart
     def subtotal
       subtotal = 0
       unless @session.nil?
-        @session.each do |k, v|
-          subtotal += k.split('_')[0].constantize.find(k.split('_')[1]).price * v
+        @session.each do |klass_with_id, qty|
+          subtotal += find_in_model(klass_with_id).price * qty
         end
         subtotal -= @discount unless @discount.nil?
         subtotal
@@ -22,8 +22,8 @@ module SimpleCart
     def items
       unless @session.nil?
         arr = []
-        @session.each do |k, v|
-          arr << k.split('_')[0].constantize.find(k.split('_')[1])
+        @session.each do |klass_with_id, qty|
+          arr << find_in_model(klass_with_id)
         end
         arr
       end
@@ -69,6 +69,11 @@ module SimpleCart
     def discount(code=nil)
       coupon = SimpleCart.coupon_class.find_by(code: code)
       self.subtotal * (coupon.discount / 100.0) unless coupon.nil?
+    end
+
+    private 
+    def find_in_model(klass_with_id)
+      klass_with_id.split('_')[0].constantize.find(klass_with_id.split('_')[1])
     end
   end
 end

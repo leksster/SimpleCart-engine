@@ -1,7 +1,6 @@
-= form_for item, :url => simple_cart.add_to_cart_path(item), :html => {:class => 'form-inline one-line text-center'}, method: :post do |f|
+= form_for item, :url => simple_cart.add_to_cart_path(item, klass: item.class), :html => {:class => 'form-inline one-line text-center'}, method: :post do |f|
   %h2
     = number_to_currency(item.price)
   .form-group.integer.required.one-line
     = number_field_tag :qty, '1', class: 'form-control one-line', value: '1', min: '1', max: '99'
-    = hidden_field_tag(:klass, :item, :value => item.class)
     = f.submit 'Add to cart', class: 'btn btn-default btn btn-primary'

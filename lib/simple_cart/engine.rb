@@ -6,7 +6,6 @@ require 'aasm'
 require 'jquery-rails'
 require 'turbolinks'
 
-
 module SimpleCart
   class Engine < ::Rails::Engine
     config.before_initialize do
