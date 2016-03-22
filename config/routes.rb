@@ -1,7 +1,7 @@
 SimpleCart::Engine.routes.draw do
   resource :cart, only: [:show, :destroy, :update] do
     post :clear
-    get :remove
+    post :remove
     post :checkout
     post ':item_id' => 'carts#add', as: :add_to
   end

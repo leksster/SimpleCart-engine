@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple_cart (0.0.4)
+    simple_cart (0.0.5)
       aasm (~> 4.9)
       bootstrap-sass (~> 3.3)
       haml (~> 4.0)

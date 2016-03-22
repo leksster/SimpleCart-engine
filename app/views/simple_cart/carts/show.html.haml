@@ -40,7 +40,7 @@
                       %td
                         = number_to_currency(item.price * @cart.session["#{item.class.to_s}_#{item.id}"])
                       %td
-                        = link_to 'X', simple_cart.remove_cart_path(:id => "#{item.class.to_s}_#{item.id}")
+                        = link_to 'X', simple_cart.remove_cart_path(:id => "#{item.class.to_s}_#{item.id}"), class: 'btn btn-danger', method: :post
                   %tr
                     %td{colspan: 3}
                     %td
